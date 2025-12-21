@@ -1,0 +1,12 @@
+[project]
+name = "beamz-notebooks"
+version = "0.1.0"
+description = "Example notebooks demonstrating BEAMZ for photonic design and optimization"
+requires-python = ">=3.13"
+dependencies = [
+    "beamz>=0.1.13",
+    "ipykernel>=7.1.0",
+    "jupyter>=1.1.1",
+    "matplotlib>=3.10.8",
+    "numpy>=2.4.0",
+]
