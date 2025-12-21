@@ -1,25 +1,6 @@
 # Example Notebooks for [BEAMZ](https://github.com/quentinwach/beamz)
 
-## Setup
-
-This repository uses [uv](https://github.com/astral-sh/uv) for dependency management. To get started:
-
-1. Install dependencies and create a virtual environment:
-   ```bash
-   uv sync
-   ```
-
-2. Activate the virtual environment:
-   ```bash
-   source .venv/bin/activate
-   ```
-
-3. Launch Jupyter:
-   ```bash
-   jupyter notebook
-   # or
-   jupyter lab
-   ```
+Setup with [uv](https://github.com/astral-sh/uv): `uv sync && source .venv/bin/activate && jupyter lab`
 
 ## Notebooks
 
