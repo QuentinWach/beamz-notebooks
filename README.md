@@ -1,6 +1,17 @@
 # Example Notebooks for [BEAMZ](https://github.com/quentinwach/beamz)
 
-Setup with [uv](https://github.com/astral-sh/uv): `uv sync && source .venv/bin/activate && jupyter lab`
+This repository uses [uv](https://github.com/astral-sh/uv) for fast and reliable dependency management. Get started by cloning the repository, setting up the environment, then just open one of the [Juypter notebooks]():
+
+```bash
+git clone https://github.com/QuentinWach/beamz-notebooks
+cd beamz-notebooks
+uv sync
+```
+then activate the environment with
+```bash
+source .venv/bin/activate
+```
+(or on Windows: `.venv\Scripts\activate`)
 
 ## Notebooks
 
