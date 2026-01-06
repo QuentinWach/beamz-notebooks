@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Example notebooks demonstrating BEAMZ for photonic design and optimization"
 requires-python = ">=3.13"
 dependencies = [
-    "beamz>=0.1.13",
+    "beamz>=0.1.16",
     "ipykernel>=7.1.0",
     "jupyter>=1.1.1",
     "matplotlib>=3.10.8",
