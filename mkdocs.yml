@@ -1,0 +1,56 @@
+site_name: BEAMZ Notebooks
+site_description: Interactive example notebooks for the BEAMZ photonic simulation package
+site_author: Quentin Wach
+site_url: https://quentinwach.github.io/beamz-notebooks/
+repo_url: https://github.com/QuentinWach/beamz-notebooks
+repo_name: QuentinWach/beamz-notebooks
+
+docs_dir: docs
+
+theme:
+  name: shadcn
+  show_title: true
+  show_stargazers: true
+  icon: assets/BEAMZ_logo.png
+  pygments_style:
+    light: shadcn-light
+    dark: github-dark
+  topbar_sections: false
+  show_datetime: true
+
+plugins:
+  - search
+  - mkdocs-jupyter:
+      execute: false
+      allow_errors: false
+      include_source: true
+      ignore_h1_titles: true
+      show_input: true
+      remove_tag_config:
+        remove_cell_tags: [hide_code]
+        remove_all_outputs_tags: [hide_output]
+        remove_input_tags: [hide_input]
+
+markdown_extensions:
+  - admonition
+  - footnotes
+  - attr_list
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Examples:
+    - Topology Optimization - 90° Bend: examples/topo_opt_bend.ipynb
+    - Ring Resonator Animation: examples/animation_demo.ipynb
+  - About: about.md

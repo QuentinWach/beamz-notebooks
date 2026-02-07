@@ -5,8 +5,17 @@ description = "Example notebooks demonstrating BEAMZ for photonic design and opt
 requires-python = ">=3.13"
 dependencies = [
     "beamz>=0.1.16",
-    "ipykernel>=7.1.0",
+    "ipykernel>=6.29.0",
     "jupyter>=1.1.1",
     "matplotlib>=3.10.8",
     "numpy>=2.4.0",
+]
+
+[project.optional-dependencies]
+docs = [
+    "mkdocs>=1.6.0",
+    "mkdocs-shadcn>=0.9.9",
+    "mkdocs-jupyter>=0.25.1",
+    "pymdown-extensions>=10.0",
+    "pygments>=2.18.0",
 ]
