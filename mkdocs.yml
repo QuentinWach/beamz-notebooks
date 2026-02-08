@@ -7,6 +7,9 @@ repo_name: QuentinWach/beamz-notebooks
 
 docs_dir: docs
 
+extra_css:
+  - css/notebook.css
+
 theme:
   name: shadcn
   show_title: true
