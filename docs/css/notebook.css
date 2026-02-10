@@ -171,3 +171,9 @@
 .jupyter-wrapper .jp-RenderedHTMLCommon {
   width: 100% !important;
 }
+
+
+/* ===== 8. Hide dark/light mode toggle ===== */
+button[title="Toggle theme"] {
+  display: none !important;
+}
