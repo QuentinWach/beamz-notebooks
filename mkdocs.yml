@@ -10,8 +10,12 @@ docs_dir: docs
 extra_css:
   - css/notebook.css
 
+extra_javascript:
+  - js/notebook.js
+
 theme:
   name: shadcn
+  custom_dir: docs/overrides
   show_title: true
   show_stargazers: true
   icon: assets/BEAMZ_logo.png
