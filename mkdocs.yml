@@ -1,4 +1,4 @@
-site_name: BEAMZ Notebooks
+site_name: BEAMZ Docs
 site_description: Interactive example notebooks for the BEAMZ photonic simulation package
 site_author: Quentin Wach
 site_url: https://quentinwach.github.io/beamz-notebooks/
@@ -8,6 +8,7 @@ repo_name: QuentinWach/beamz-notebooks
 docs_dir: docs
 
 extra_css:
+  - css/variables.css
   - css/notebook.css
   # KaTeX styles for LaTeX rendering
   - https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css
@@ -25,7 +26,6 @@ theme:
   custom_dir: docs/overrides
   show_title: true
   show_stargazers: true
-  icon: assets/BEAMZ_logo.png
   pygments_style:
     light: shadcn-light
     dark: github-dark
