@@ -77,6 +77,10 @@
 
   --spacing:    .25rem;            /* base unit — multiply for gaps   */
 
+  /* Content width — wider so notebooks/code show more per line */
+  --container-lg:  40rem;
+  --container-2xl: 60rem;
+
   --radius:     .625rem;           /* default border-radius           */
   --radius-sm:  calc(.625rem - 4px);
   --radius-md:  calc(.625rem - 2px);

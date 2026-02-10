@@ -6,7 +6,12 @@
  * order. Every rule here that competes with inline Jupyter CSS uses !important.
  */
 
-/* ===== 0. Tighter text line spacing site-wide ===== */
+/* ===== 0. Wider content + tighter text line spacing ===== */
+/* Main content column wider so notebooks show more code */
+article {
+  max-width: var(--container-2xl) !important;
+}
+
 article p,
 article li,
 article .typography p,
