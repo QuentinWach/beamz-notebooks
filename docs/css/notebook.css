@@ -108,7 +108,6 @@
   background-color: var(--color-muted) !important;
   border-radius: var(--radius-xl) !important;
   padding: calc(var(--spacing) * 4) !important;
-  max-height: 650px !important;
   overflow: auto !important;
   display: block !important;
   font-family: var(--font-mono) !important;
@@ -206,4 +205,11 @@ button[title="Toggle theme"] {
 /* ===== 12. Output child spacing ===== */
 .jupyter-wrapper .jp-OutputArea-child + .jp-OutputArea-child {
   margin-top: calc(var(--spacing) * 2) !important;
+}
+
+/* ===== 13. Never vertically scroll code blocks ===== */
+/* Ensure all code (not just notebooks) shows in full without internal scrolling */
+article pre {
+  max-height: none !important;
+  overflow: visible !important;
 }
