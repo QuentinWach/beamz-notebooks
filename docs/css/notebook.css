@@ -6,6 +6,13 @@
  * order. Every rule here that competes with inline Jupyter CSS uses !important.
  */
 
+/* ===== 0. Tighter text line spacing site-wide ===== */
+article p,
+article li,
+article .typography p,
+article .typography li {
+  line-height: var(--leading-relaxed) !important;
+}
 
 /* ===== 1. Hide Jupyter chrome ===== */
 
@@ -111,8 +118,8 @@
   overflow: auto !important;
   display: block !important;
   font-family: var(--font-mono) !important;
-  font-size: var(--text-sm) !important;
-  line-height: var(--tw-leading, var(--text-sm--line-height)) !important;
+  font-size: var(--text-code) !important;
+  line-height: 1.4 !important;
   margin-top: calc(var(--spacing) * 6) !important;
   margin-bottom: calc(var(--spacing) * 4) !important;
 }
@@ -154,8 +161,8 @@
 /* Text output: mono font, proper sizing */
 .jupyter-wrapper .jp-RenderedText pre {
   font-family: var(--font-mono) !important;
-  font-size: var(--text-sm) !important;
-  line-height: var(--tw-leading, var(--text-sm--line-height)) !important;
+  font-size: var(--text-code) !important;
+  line-height: 1.4 !important;
   padding: calc(var(--spacing) * 4) !important;
   margin-bottom: calc(var(--spacing) * 4) !important;
   border: none !important;
@@ -197,7 +204,7 @@ button[title="Toggle theme"] {
   background-color: var(--color-muted) !important;
   border-radius: var(--radius-xl) !important;
   padding: calc(var(--spacing) * 4) !important;
-  font-size: var(--text-sm) !important;
+  font-size: var(--text-code) !important;
   margin-bottom: calc(var(--spacing) * 4) !important;
 }
 
@@ -207,9 +214,16 @@ button[title="Toggle theme"] {
   margin-top: calc(var(--spacing) * 2) !important;
 }
 
-/* ===== 13. Never vertically scroll code blocks ===== */
+/* ===== 13. Never vertically scroll code blocks + smaller code font ===== */
 /* Ensure all code (not just notebooks) shows in full without internal scrolling */
 article pre {
   max-height: none !important;
   overflow: visible !important;
+  font-size: var(--text-code) !important;
+  line-height: 1.4 !important;
+}
+
+/* Inline code in markdown */
+article code {
+  font-size: 0.85em !important;
 }

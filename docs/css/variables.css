@@ -61,6 +61,7 @@
 
   --text-xs:    .75rem;
   --text-sm:    .875rem;
+  --text-code:  .8rem;           /* smaller than text-sm for code blocks */
   --text-base:  1rem;
   --text-lg:    1.125rem;
   --text-xl:    1.25rem;
@@ -68,8 +69,8 @@
   --text-3xl:   1.875rem;
   --text-4xl:   2.25rem;
 
-  --leading-relaxed: 1.625;
-  --leading-loose:   2;
+  --leading-relaxed: 1.4;        /* tighter line spacing for body text */
+  --leading-loose:   1.75;
 
 
   /* ── Spacing & Radius ────────────────────────────────────── */
