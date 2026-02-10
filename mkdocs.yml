@@ -9,9 +9,16 @@ docs_dir: docs
 
 extra_css:
   - css/notebook.css
+  # KaTeX styles for LaTeX rendering
+  - https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css
 
 extra_javascript:
   - js/notebook.js
+  # KaTeX core + auto-render
+  - https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js
+  - https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js
+  # Initialize math rendering for pymdownx.arithmatex (generic mode)
+  - js/math.js
 
 theme:
   name: shadcn
