@@ -31,6 +31,7 @@
 
 .jupyter-wrapper .jp-Notebook {
   padding: 0 !important;
+  overflow: visible !important;
 }
 
 .jupyter-wrapper .jp-Cell {
@@ -129,8 +130,8 @@
 
 .jupyter-wrapper .zeroclipboard-container {
   position: absolute !important;
-  top: calc(var(--spacing) * 6 + 4px) !important;
-  right: 4px !important;
+  top: 8px !important;
+  right: 8px !important;
   z-index: 1 !important;
 }
 
