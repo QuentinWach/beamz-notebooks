@@ -191,9 +191,14 @@ button[title="Toggle theme"] {
 }
 
 
-/* ===== 9. Hide duplicate notebook H1 title ===== */
+/* ===== 9. Hide duplicate notebook H1 + make page title bolder ===== */
 .jupyter-wrapper .jp-Notebook > .jp-MarkdownCell:first-child h1 {
   display: none !important;
+}
+
+/* Bolder h1 title on notebook pages */
+article #page-header h1 {
+  font-weight: 700 !important;
 }
 
 
@@ -219,16 +224,42 @@ button[title="Toggle theme"] {
   margin-top: calc(var(--spacing) * 2) !important;
 }
 
-/* ===== 13. Never vertically scroll code blocks + smaller code font ===== */
-/* Ensure all code (not just notebooks) shows in full without internal scrolling */
-article pre {
+/* ===== 13. Markdown code blocks + inline code (match notebook style) ===== */
+/* Block code: same look as notebook code cells */
+article pre,
+article .codehilite pre,
+article .highlight pre {
   max-height: none !important;
   overflow: visible !important;
+  background-color: var(--color-muted) !important;
+  border-radius: var(--radius-xl) !important;
+  padding: calc(var(--spacing) * 3) !important;
+  font-family: var(--font-mono) !important;
   font-size: var(--text-code) !important;
   line-height: 1.4 !important;
+  margin-top: calc(var(--spacing) * 2) !important;
+  margin-bottom: calc(var(--spacing) * 2) !important;
 }
 
-/* Inline code in markdown */
-article code {
+article .codehilite,
+article .highlight {
+  margin-top: calc(var(--spacing) * 2) !important;
+  margin-bottom: calc(var(--spacing) * 2) !important;
+  border-radius: var(--radius-xl) !important;
+  overflow: hidden !important;
+}
+
+article .codehilite pre,
+article .highlight pre {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Inline code in markdown: match notebook inline style */
+article code:not(pre code) {
+  font-family: var(--font-mono) !important;
   font-size: 0.85em !important;
+  background-color: var(--color-muted) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 0.15em 0.35em !important;
 }
