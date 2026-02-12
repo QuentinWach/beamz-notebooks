@@ -130,7 +130,7 @@
 
 /* Notebook-specific styles */
 .notebook-content {
-  @apply leading-relaxed;
+  line-height: 1.4;
 }
 
 .notebook-content h1 { @apply text-3xl font-bold mt-8 mb-4; }
