@@ -16,7 +16,7 @@ function ImageOutput({ output }: { output: ParsedOutput }) {
 
 function TextOutput({ output }: { output: ParsedOutput }) {
   return (
-    <pre className="my-2 bg-muted/30 border border-border rounded-md p-3 text-sm overflow-x-auto whitespace-pre-wrap font-mono">
+    <pre className="my-2 bg-muted/30 border border-border rounded-md p-3 text-xs overflow-x-auto whitespace-pre-wrap font-mono">
       {output.content}
     </pre>
   )
@@ -39,7 +39,7 @@ function ErrorOutput({ output }: { output: ParsedOutput }) {
   const html = ansiConverter.toHtml(output.content)
   return (
     <pre
-      className="my-2 bg-red-50 border border-red-200 rounded-md p-3 text-sm overflow-x-auto font-mono text-red-900"
+      className="my-2 bg-red-50 border border-red-200 rounded-md p-3 text-xs overflow-x-auto font-mono text-red-900"
       dangerouslySetInnerHTML={{ __html: html }}
     />
   )
