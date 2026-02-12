@@ -1,54 +1,23 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+# Dependencies
+website/node_modules/
 
-# Virtual environments
-.venv/
-venv/
-ENV/
-env/
+# Build output
+website/dist/
 
-# Jupyter
-.ipynb_checkpoints/
-*.ipynb_checkpoints
+# Generated notebook data
+website/src/data/*.gen.ts
+
+# Copied notebooks in public
+website/public/notebooks/
 
 # IDE
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Project specific
-*.png
-!imgs/*.png
-topo_opt_*.png
-transmission_*.png
-final_*.png
-*.mp4
-
-
-
-
+# Env
+.env
+.env.local
