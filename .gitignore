@@ -1,0 +1,23 @@
+# Dependencies
+website/node_modules/
+
+# Build output
+website/dist/
+
+# Generated notebook data
+website/src/data/*.gen.ts
+
+# Copied notebooks in public
+website/public/notebooks/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.local
