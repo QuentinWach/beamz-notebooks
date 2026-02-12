@@ -22,11 +22,15 @@ export function GalleryCard({ notebook }: { notebook: NotebookMeta }) {
           </div>
         )}
         <CardHeader>
-          <div className="flex items-center gap-2 mb-1">
-            <Badge variant="secondary" className="text-xs">
-              {notebook.category}
-            </Badge>
-          </div>
+          {notebook.tags.length > 0 && (
+            <div className="flex items-center gap-2 mb-1">
+              {notebook.tags.map((tag) => (
+                <Badge key={tag} variant="secondary" className="text-xs">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          )}
           <CardTitle className="text-base leading-snug">{notebook.title}</CardTitle>
           <CardDescription className="line-clamp-2 text-sm">
             {notebook.description}

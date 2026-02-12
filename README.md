@@ -32,15 +32,17 @@ A brief description of what this notebook demonstrates.
 **Author:** Your Name
 **Published:** 2025-01-15
 **Updated:** 2025-02-01
+**Tags:** Simulation, Optimization
 ```
 
-All fields are optional. If omitted, the author defaults to "Unknown" and dates default to the file's modification time.
+All fields are optional. Tags are comma-separated and drive the homepage filter pills. If omitted, the author defaults to "Unknown", dates default to the file's modification time, and tags default to none.
 
 You can also drag & drop a preview image into this cell as a Jupyter cell attachment:
 
 ```markdown
 **Author:** Your Name
 **Published:** 2025-01-15
+**Tags:** Simulation, Visualization
 
 ![preview](attachment:preview.png)
 ```

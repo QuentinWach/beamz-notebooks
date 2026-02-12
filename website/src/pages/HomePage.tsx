@@ -7,21 +7,21 @@ import { Search } from 'lucide-react'
 
 export function HomePage() {
   const [query, setQuery] = useState('')
-  const [activeCategory, setActiveCategory] = useState<string | null>(null)
+  const [activeTag, setActiveTag] = useState<string | null>(null)
 
-  const categories = useMemo(
-    () => Array.from(new Set(notebooks.map((nb) => nb.category))),
+  const tags = useMemo(
+    () => Array.from(new Set(notebooks.flatMap((nb) => nb.tags))),
     []
   )
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase()
     return notebooks.filter((nb) => {
-      if (activeCategory && nb.category !== activeCategory) return false
-      if (q && !nb.title.toLowerCase().includes(q) && !nb.description.toLowerCase().includes(q)) return false
+      if (activeTag && !nb.tags.includes(activeTag)) return false
+      if (q && !nb.title.toLowerCase().includes(q) && !nb.description.toLowerCase().includes(q) && !nb.tags.some(t => t.toLowerCase().includes(q))) return false
       return true
     })
-  }, [query, activeCategory])
+  }, [query, activeTag])
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
@@ -45,21 +45,23 @@ export function HomePage() {
         />
       </div>
 
-      {/* Category filter pills */}
-      <div className="flex flex-wrap justify-center gap-2 mb-8">
-        <button onClick={() => setActiveCategory(null)}>
-          <Badge variant={activeCategory === null ? 'default' : 'outline'}>
-            All
-          </Badge>
-        </button>
-        {categories.map((cat) => (
-          <button key={cat} onClick={() => setActiveCategory(cat)}>
-            <Badge variant={activeCategory === cat ? 'default' : 'outline'}>
-              {cat}
+      {/* Tag filter pills */}
+      {tags.length > 0 && (
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
+          <button onClick={() => setActiveTag(null)}>
+            <Badge variant={activeTag === null ? 'default' : 'outline'}>
+              All
             </Badge>
           </button>
-        ))}
-      </div>
+          {tags.map((tag) => (
+            <button key={tag} onClick={() => setActiveTag(tag)}>
+              <Badge variant={activeTag === tag ? 'default' : 'outline'}>
+                {tag}
+              </Badge>
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Notebook grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

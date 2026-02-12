@@ -64,9 +64,9 @@ export function SubmitNotebookCard() {
           <p className="text-xs text-muted-foreground mb-2">
             <strong>Cell 2</strong> (markdown, optional) — metadata:
           </p>
-          <pre className="text-xs bg-muted rounded p-2 mb-2 overflow-x-auto"><code>{'**Author:** Your Name\n**Published:** 2025-01-15\n**Updated:** 2025-02-01'}</code></pre>
+          <pre className="text-xs bg-muted rounded p-2 mb-2 overflow-x-auto"><code>{'**Author:** Your Name\n**Published:** 2025-01-15\n**Updated:** 2025-02-01\n**Tags:** Simulation, Optimization'}</code></pre>
           <p className="text-xs text-muted-foreground">
-            All fields are optional. You can also drag & drop a preview image into this cell. If omitted, the first plot output is used automatically.
+            All fields are optional. Tags are comma-separated and drive the homepage filter pills. You can also drag & drop a preview image into this cell. If omitted, the first plot output is used automatically.
           </p>
         </div>
         <Button asChild className="mt-2">

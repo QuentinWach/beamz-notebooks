@@ -24,7 +24,6 @@ export interface ParsedNotebook {
   slug: string
   title: string
   description: string
-  category: string
   tags: string[]
   author: string
   publishedDate: string
@@ -38,7 +37,6 @@ export interface NotebookMeta {
   slug: string
   title: string
   description: string
-  category: string
   tags: string[]
   author: string
   publishedDate: string
