@@ -158,7 +158,6 @@ html {
 /* Shiki code blocks — !important needed to override Shiki inline styles */
 .group pre.shiki {
   margin: 0 !important;
-  background-color: #f8f8f8 !important;
   border-radius: 0 0 calc(var(--radius) - 2px) calc(var(--radius) - 2px) !important;
   overflow-x: auto;
   overflow-y: hidden;
@@ -169,6 +168,28 @@ html {
   padding: 0.75rem 1rem 0.75rem 1.25rem;
   font-size: 0.75rem;
   line-height: 1.4;
+}
+
+/* Dark mode: swap Shiki token colors to dark variants */
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+
+/* Code block scrollbars */
+.group pre.shiki::-webkit-scrollbar {
+  height: 6px;
+}
+.group pre.shiki::-webkit-scrollbar-track {
+  background: transparent;
+}
+.group pre.shiki::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+}
+.dark .group pre.shiki::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* KaTeX overrides */
