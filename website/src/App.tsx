@@ -6,7 +6,7 @@ import { NotFoundPage } from '@/pages/NotFoundPage'
 
 export default function App() {
   return (
-    <BrowserRouter basename="/beamz-notebooks">
+    <BrowserRouter basename="/beamz-notebooks/">
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<HomePage />} />
