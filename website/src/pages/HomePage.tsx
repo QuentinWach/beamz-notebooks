@@ -25,9 +25,10 @@ export function HomePage() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold mb-2">BEAMZ Examples</h1>
+        <h1 className="text-3xl font-bold mb-2">BEAMZ Notebooks</h1>
         <p className="text-muted-foreground text-lg">
-          Interactive notebooks demonstrating photonic simulation workflows.
+          Jupyter notebooks demonstrating photonic simulation, <br />
+          visualization, and optimization workflows with <a href="https://github.com/QuentinWach/beamz" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4 hover:text-primary/80">BEAMZ</a>.
         </p>
       </div>
 
