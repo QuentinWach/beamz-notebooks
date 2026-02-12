@@ -7,11 +7,13 @@ import { TableOfContents } from '@/components/layout/TableOfContents'
 import { notebooks } from '@/data/notebooks.gen'
 import type { ParsedNotebook } from '@/types/notebook'
 
-// Lazy load notebook data modules
-const loaders: Record<string, () => Promise<{ default: ParsedNotebook }>> = {
-  animation_demo: () => import('@/data/nb-animation_demo.gen'),
-  ring_resonator: () => import('@/data/nb-ring_resonator.gen'),
-  topo_opt_bend: () => import('@/data/nb-topo_opt_bend.gen'),
+// Dynamically discover all generated notebook modules at build time
+const modules = import.meta.glob<{ default: ParsedNotebook }>('@/data/nb-*.gen.ts')
+
+const loaders: Record<string, () => Promise<{ default: ParsedNotebook }>> = {}
+for (const [path, loader] of Object.entries(modules)) {
+  const match = path.match(/nb-(.+)\.gen\.ts$/)
+  if (match) loaders[match[1]] = loader
 }
 
 export function NotebookPage() {
