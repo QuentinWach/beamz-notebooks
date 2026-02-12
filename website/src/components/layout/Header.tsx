@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
-import { BookOpen, Github, Moon, Star, Sun } from 'lucide-react'
+import { Github, Moon, Star, Sun } from 'lucide-react'
+import beamzLogo from '../../BEAMZ_logo.png'
 import { useTheme } from '../../hooks/useTheme'
 
 export function Header() {
@@ -18,7 +19,7 @@ export function Header() {
     <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between h-14 px-4">
         <Link to="/" className="flex items-center gap-2 font-semibold text-lg hover:opacity-80 transition-opacity">
-          <BookOpen className="h-5 w-5" />
+          <img src={beamzLogo} alt="BEAMZ" className="h-7 w-auto" />
           BEAMZ Notebooks
         </Link>
         <nav className="flex items-center gap-4 text-sm">
