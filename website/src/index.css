@@ -158,6 +158,7 @@ html {
 /* Shiki code blocks — !important needed to override Shiki inline styles */
 .group pre.shiki {
   margin: 0 !important;
+  background-color: #f8f8f8 !important;
   border-radius: 0 0 calc(var(--radius) - 2px) calc(var(--radius) - 2px) !important;
   overflow-x: auto;
   overflow-y: hidden;
@@ -171,9 +172,11 @@ html {
 }
 
 /* Dark mode: swap Shiki token colors to dark variants */
-.dark .shiki,
 .dark .shiki span {
   color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+.dark .group pre.shiki {
   background-color: var(--shiki-dark-bg) !important;
 }
 
