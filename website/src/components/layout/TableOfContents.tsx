@@ -35,7 +35,7 @@ export function TableOfContents({ entries }: { entries: TocEntry[] }) {
             <li key={entry.id} style={{ paddingLeft: `${(entry.level - 1) * 0.75}rem` }}>
               <a
                 href={`#${entry.id}`}
-                className={`block py-1 transition-colors hover:text-foreground ${
+                className={`block py-0.5 transition-colors hover:text-foreground ${
                   activeId === entry.id
                     ? 'text-foreground font-medium'
                     : 'text-muted-foreground'
