@@ -39,6 +39,12 @@ export function GalleryCard({ notebook }: { notebook: NotebookMeta }) {
             <span>{notebook.author}</span>
             <span>·</span>
             <span>{formatDate(notebook.publishedDate)}</span>
+            {notebook.beamzVersion && (
+              <>
+                <span>·</span>
+                <span>Beamz {notebook.beamzVersion}</span>
+              </>
+            )}
           </div>
         </CardHeader>
       </Card>

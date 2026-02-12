@@ -28,6 +28,7 @@ export interface ParsedNotebook {
   author: string
   publishedDate: string
   updatedDate: string
+  beamzVersion?: string
   previewImage?: string
   cells: ParsedCell[]
   toc: TocEntry[]
@@ -41,5 +42,6 @@ export interface NotebookMeta {
   author: string
   publishedDate: string
   updatedDate: string
+  beamzVersion?: string
   previewImage?: string
 }
