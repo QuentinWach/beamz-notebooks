@@ -1,34 +1,76 @@
+import { useState, useMemo } from 'react'
 import { notebooks } from '@/data/notebooks.gen'
 import { GalleryCard } from '@/components/gallery/GalleryCard'
+import { Badge } from '@/components/ui/badge'
+import { Search } from 'lucide-react'
 
 export function HomePage() {
-  // Group by category
-  const categories = new Map<string, typeof notebooks>()
-  for (const nb of notebooks) {
-    const list = categories.get(nb.category) || []
-    list.push(nb)
-    categories.set(nb.category, list)
-  }
+  const [query, setQuery] = useState('')
+  const [activeCategory, setActiveCategory] = useState<string | null>(null)
+
+  const categories = useMemo(
+    () => Array.from(new Set(notebooks.map((nb) => nb.category))),
+    []
+  )
+
+  const filtered = useMemo(() => {
+    const q = query.toLowerCase()
+    return notebooks.filter((nb) => {
+      if (activeCategory && nb.category !== activeCategory) return false
+      if (q && !nb.title.toLowerCase().includes(q) && !nb.description.toLowerCase().includes(q)) return false
+      return true
+    })
+  }, [query, activeCategory])
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
-      <div className="mb-10">
+      <div className="mb-8 text-center">
         <h1 className="text-3xl font-bold mb-2">BEAMZ Examples</h1>
         <p className="text-muted-foreground text-lg">
           Interactive notebooks demonstrating photonic simulation workflows.
         </p>
       </div>
 
-      {Array.from(categories.entries()).map(([category, nbs]) => (
-        <section key={category} className="mb-10">
-          <h2 className="text-xl font-semibold mb-4">{category}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {nbs.map((nb) => (
-              <GalleryCard key={nb.slug} notebook={nb} />
-            ))}
-          </div>
-        </section>
-      ))}
+      {/* Search bar */}
+      <div className="relative max-w-xl mx-auto mb-6">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+        <input
+          type="text"
+          placeholder="Search examples..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="w-full rounded-md border border-input bg-background px-9 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+        />
+      </div>
+
+      {/* Category filter pills */}
+      <div className="flex flex-wrap justify-center gap-2 mb-8">
+        <button onClick={() => setActiveCategory(null)}>
+          <Badge variant={activeCategory === null ? 'default' : 'outline'}>
+            All
+          </Badge>
+        </button>
+        {categories.map((cat) => (
+          <button key={cat} onClick={() => setActiveCategory(cat)}>
+            <Badge variant={activeCategory === cat ? 'default' : 'outline'}>
+              {cat}
+            </Badge>
+          </button>
+        ))}
+      </div>
+
+      {/* Notebook grid */}
+      {filtered.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filtered.map((nb) => (
+            <GalleryCard key={nb.slug} notebook={nb} />
+          ))}
+        </div>
+      ) : (
+        <p className="text-center text-muted-foreground py-12">
+          No examples found matching your filters.
+        </p>
+      )}
     </div>
   )
 }
