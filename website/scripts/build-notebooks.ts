@@ -111,6 +111,21 @@ function extractMetadata(cells: RawCell[], fallbackDate: string): ExtractedMetad
           if (previewImage) break
         }
       }
+
+      // Fallback: check for markdown image references to files on disk
+      if (!previewImage) {
+        const imgRefMatch = metaSource.match(/!\[.*?\]\((?:attachment:)?(.+?)\)/)
+        if (imgRefMatch) {
+          const imgPath = path.resolve(NOTEBOOKS_DIR, imgRefMatch[1])
+          if (fs.existsSync(imgPath)) {
+            const ext = path.extname(imgPath).toLowerCase()
+            const mimeMap: Record<string, string> = { '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.svg': 'image/svg+xml' }
+            const mime = mimeMap[ext] || 'image/png'
+            const base64 = fs.readFileSync(imgPath).toString('base64')
+            previewImage = `data:${mime};base64,${base64}`
+          }
+        }
+      }
     }
   }
 
