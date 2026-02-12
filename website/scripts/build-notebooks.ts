@@ -18,6 +18,7 @@ interface RawCell {
   source: string[]
   outputs?: RawOutput[]
   execution_count?: number | null
+  attachments?: Record<string, Record<string, string>>
 }
 
 interface RawOutput {
@@ -33,10 +34,23 @@ function slugify(filename: string): string {
   return filename.replace(/\.ipynb$/, '').replace(/[^a-z0-9]+/gi, '_').toLowerCase()
 }
 
-function extractMetadata(cells: RawCell[]): { title: string; description: string; category: string; tags: string[] } {
-  const firstMd = cells.find(c => c.cell_type === 'markdown')
-  if (!firstMd) return { title: 'Untitled', description: '', category: 'General', tags: [] }
+interface ExtractedMetadata {
+  title: string
+  description: string
+  category: string
+  tags: string[]
+  author: string
+  publishedDate: string
+  updatedDate: string
+  previewImage: string
+  metadataCellIndex: number | null
+}
 
+function extractMetadata(cells: RawCell[], fallbackDate: string): ExtractedMetadata {
+  const firstMdIndex = cells.findIndex(c => c.cell_type === 'markdown')
+  if (firstMdIndex === -1) return { title: 'Untitled', description: '', category: 'General', tags: [], author: 'Unknown', publishedDate: fallbackDate, updatedDate: fallbackDate, previewImage: '', metadataCellIndex: null }
+
+  const firstMd = cells[firstMdIndex]
   const source = firstMd.source.join('')
   const titleMatch = source.match(/^#\s+(.+)$/m)
   const title = titleMatch ? titleMatch[1].trim() : 'Untitled'
@@ -61,7 +75,45 @@ function extractMetadata(cells: RawCell[]): { title: string; description: string
   else if (lowerSource.includes('animation') || lowerSource.includes('visualization')) category = 'Visualization'
   else if (lowerSource.includes('resonator') || lowerSource.includes('simulation')) category = 'Simulation'
 
-  return { title, description, category, tags: [] }
+  // Check the next cell for metadata (author, dates, preview image)
+  let author = 'Unknown'
+  let publishedDate = fallbackDate
+  let updatedDate = fallbackDate
+  let previewImage = ''
+  let metadataCellIndex: number | null = null
+
+  const nextIndex = firstMdIndex + 1
+  if (nextIndex < cells.length && cells[nextIndex].cell_type === 'markdown') {
+    const metaSource = cells[nextIndex].source.join('')
+    if (metaSource.includes('**Author:**')) {
+      metadataCellIndex = nextIndex
+
+      const authorMatch = metaSource.match(/\*\*Author:\*\*\s*(.+)/)
+      if (authorMatch) author = authorMatch[1].trim()
+
+      const pubMatch = metaSource.match(/\*\*Published:\*\*\s*(.+)/)
+      if (pubMatch) publishedDate = pubMatch[1].trim()
+
+      const updMatch = metaSource.match(/\*\*Updated:\*\*\s*(.+)/)
+      if (updMatch) updatedDate = updMatch[1].trim()
+
+      // Check cell attachments for preview image
+      const attachments = cells[nextIndex].attachments
+      if (attachments) {
+        for (const [, mimeData] of Object.entries(attachments)) {
+          for (const [mime, base64] of Object.entries(mimeData)) {
+            if (mime.startsWith('image/')) {
+              previewImage = `data:${mime};base64,${base64}`
+              break
+            }
+          }
+          if (previewImage) break
+        }
+      }
+    }
+  }
+
+  return { title, description, category, tags: [], author, publishedDate, updatedDate, previewImage, metadataCellIndex }
 }
 
 function extractToc(cells: RawCell[]): { id: string; text: string; level: number }[] {
@@ -151,23 +203,25 @@ async function main() {
   const nbFiles = fs.readdirSync(NOTEBOOKS_DIR).filter(f => f.endsWith('.ipynb'))
   console.log(`Found ${nbFiles.length} notebooks: ${nbFiles.join(', ')}`)
 
-  const allMeta: { slug: string; title: string; description: string; category: string; tags: string[]; date: string }[] = []
+  const allMeta: { slug: string; title: string; description: string; category: string; tags: string[]; author: string; publishedDate: string; updatedDate: string; previewImage?: string }[] = []
 
   for (const file of nbFiles) {
     const filePath = path.join(NOTEBOOKS_DIR, file)
     const raw: RawNotebook = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
     const slug = slugify(file)
 
-    // Get file modification date
+    // Get file modification date as fallback
     const stat = fs.statSync(filePath)
-    const date = stat.mtime.toISOString().split('T')[0]
+    const fallbackDate = stat.mtime.toISOString().split('T')[0]
 
-    const { title, description, category, tags } = extractMetadata(raw.cells)
+    const { title, description, category, tags, author, publishedDate, updatedDate, previewImage, metadataCellIndex } = extractMetadata(raw.cells, fallbackDate)
 
     // Process cells
     const cells: unknown[] = []
-    for (const cell of raw.cells) {
+    for (let i = 0; i < raw.cells.length; i++) {
+      const cell = raw.cells[i]
       if (cell.cell_type === 'raw') continue
+      if (i === metadataCellIndex) continue // skip metadata cell
 
       const source = cell.source.join('')
 
@@ -208,17 +262,31 @@ async function main() {
       })
     }
 
+    // Fallback preview image: find the first image output from any code cell
+    let finalPreviewImage = previewImage
+    if (!finalPreviewImage) {
+      for (const cell of cells as { outputs: { type: string; content: string; mimeType?: string }[] }[]) {
+        if (!cell.outputs) continue
+        const imgOutput = cell.outputs.find(o => o.type === 'image')
+        if (imgOutput) {
+          const mime = imgOutput.mimeType || 'image/png'
+          finalPreviewImage = `data:${mime};base64,${imgOutput.content}`
+          break
+        }
+      }
+    }
+
     const toc = extractToc(raw.cells)
 
     // Write per-notebook data file
-    const nbData = { slug, title, description, category, tags, date, cells, toc }
+    const nbData = { slug, title, description, category, tags, author, publishedDate, updatedDate, ...(finalPreviewImage ? { previewImage: finalPreviewImage } : {}), cells, toc }
     const nbModule = `// AUTO-GENERATED — do not edit\nimport type { ParsedNotebook } from '@/types/notebook'\n\nconst data: ParsedNotebook = ${JSON.stringify(nbData, null, 2)}\n\nexport default data\n`
     fs.writeFileSync(path.join(DATA_DIR, `nb-${slug}.gen.ts`), nbModule)
 
     // Copy .ipynb to public
     fs.copyFileSync(filePath, path.join(PUBLIC_NB_DIR, file))
 
-    allMeta.push({ slug, title, description, category, tags, date })
+    allMeta.push({ slug, title, description, category, tags, author, publishedDate, updatedDate, ...(finalPreviewImage ? { previewImage: finalPreviewImage } : {}) })
     console.log(`  ✓ ${file} → ${slug} (${cells.length} cells, ${toc.length} TOC entries)`)
   }
 

@@ -26,7 +26,10 @@ export interface ParsedNotebook {
   description: string
   category: string
   tags: string[]
-  date: string
+  author: string
+  publishedDate: string
+  updatedDate: string
+  previewImage?: string
   cells: ParsedCell[]
   toc: TocEntry[]
 }
@@ -37,5 +40,8 @@ export interface NotebookMeta {
   description: string
   category: string
   tags: string[]
-  date: string
+  author: string
+  publishedDate: string
+  updatedDate: string
+  previewImage?: string
 }
