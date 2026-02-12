@@ -212,7 +212,7 @@ async function main() {
   fs.mkdirSync(PUBLIC_NB_DIR, { recursive: true })
 
   const highlighter = await createHighlighter({
-    themes: ['github-light'],
+    themes: ['github-light', 'github-dark'],
     langs: ['python'],
   })
 
@@ -257,7 +257,10 @@ async function main() {
       try {
         highlightedHtml = highlighter.codeToHtml(source, {
           lang: 'python',
-          theme: 'github-light',
+          themes: {
+            light: 'github-light',
+            dark: 'github-dark',
+          },
         })
       } catch {
         highlightedHtml = `<pre><code>${source.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`
