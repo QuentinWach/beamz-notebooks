@@ -80,6 +80,12 @@ export function NotebookPage() {
                     <span>Updated {new Date(notebook.updatedDate + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                   </>
                 )}
+                {notebook.beamzVersion && (
+                  <>
+                    <span className="mx-2">·</span>
+                    <span>Beamz {notebook.beamzVersion}</span>
+                  </>
+                )}
               </div>
               <Button variant="outline" size="sm" asChild>
                 <a href={`${import.meta.env.BASE_URL}notebooks/${filename}`} download>
