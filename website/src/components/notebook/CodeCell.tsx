@@ -28,7 +28,7 @@ export function CodeCell({ cell }: { cell: ParsedCell }) {
         </button>
       </div>
       <div
-        className="border border-t-0 border-border rounded-b-md overflow-x-auto [&_pre]:!m-0 [&_pre]:!rounded-none [&_pre]:!rounded-b-md"
+        className="border border-t-0 border-border rounded-b-md"
         dangerouslySetInnerHTML={{ __html: cell.highlightedHtml || '' }}
       />
     </div>
