@@ -50,6 +50,14 @@
   --color-code-foreground:      oklch(14.5% 0 0);
   --color-code-highlight:       oklch(96% 0 0);       /* highlighted line bg      */
   --color-code-number:          oklch(56% 0 0);       /* line numbers             */
+  /* syntax highlighting (Pygments) */
+  --code-keyword:               oklch(45% 0.18 265);  /* blue – keywords, import */
+  --code-string:                oklch(45% 0.14 145);  /* green – strings */
+  --code-comment:               oklch(52% 0 0);       /* gray – comments */
+  --code-name:                  oklch(25% 0 0);       /* dark – names */
+  --code-name-builtin:          oklch(50% 0.12 260);  /* builtins (cd, echo) */
+  --code-number:                oklch(55% 0.18 35);   /* orange – numbers */
+  --code-operator:              oklch(40% 0 0);       /* operators, punctuation */
 
   --color-surface:              oklch(98% 0 0);       /* elevated surface         */
 

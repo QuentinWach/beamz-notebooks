@@ -263,3 +263,104 @@ article code:not(pre code) {
   border-radius: var(--radius-md) !important;
   padding: 0.15em 0.35em !important;
 }
+
+/* ===== 14. Syntax highlighting for markdown code blocks (Pygments) ===== */
+article .highlight span.k,
+article .highlight span.kc,
+article .highlight span.kd,
+article .highlight span.kn,
+article .highlight span.kp,
+article .highlight span.kr,
+article .highlight span.kt,
+article .codehilite span.k,
+article .codehilite span.kc,
+article .codehilite span.kd,
+article .codehilite span.kn,
+article .codehilite span.kp,
+article .codehilite span.kr,
+article .codehilite span.kt {
+  color: var(--code-keyword) !important;
+}
+
+article .highlight span.s,
+article .highlight span.s1,
+article .highlight span.s2,
+article .highlight span.sb,
+article .highlight span.sc,
+article .highlight span.sd,
+article .highlight span.se,
+article .highlight span.sh,
+article .highlight span.si,
+article .highlight span.sx,
+article .codehilite span.s,
+article .codehilite span.s1,
+article .codehilite span.s2,
+article .codehilite span.sb,
+article .codehilite span.sc,
+article .codehilite span.sd,
+article .codehilite span.se,
+article .codehilite span.sh,
+article .codehilite span.si,
+article .codehilite span.sx {
+  color: var(--code-string) !important;
+}
+
+article .highlight span.c,
+article .highlight span.c1,
+article .highlight span.cm,
+article .highlight span.cp,
+article .codehilite span.c,
+article .codehilite span.c1,
+article .codehilite span.cm,
+article .codehilite span.cp {
+  color: var(--code-comment) !important;
+  font-style: italic !important;
+}
+
+article .highlight span.nb,
+article .codehilite span.nb {
+  color: var(--code-name-builtin) !important;
+}
+
+article .highlight span.m,
+article .highlight span.mi,
+article .highlight span.mf,
+article .highlight span.mh,
+article .highlight span.mo,
+article .codehilite span.m,
+article .codehilite span.mi,
+article .codehilite span.mf,
+article .codehilite span.mh,
+article .codehilite span.mo {
+  color: var(--code-number) !important;
+}
+
+article .highlight span.o,
+article .highlight span.p,
+article .codehilite span.o,
+article .codehilite span.p {
+  color: var(--code-operator) !important;
+}
+
+article .highlight span.n,
+article .highlight span.na,
+article .highlight span.nc,
+article .highlight span.nd,
+article .highlight span.ne,
+article .highlight span.nf,
+article .highlight span.nn,
+article .highlight span.no,
+article .highlight span.nt,
+article .highlight span.nv,
+article .codehilite span.n,
+article .codehilite span.na,
+article .codehilite span.nc,
+article .codehilite span.nd,
+article .codehilite span.ne,
+article .codehilite span.nf,
+article .codehilite span.nn,
+article .codehilite span.no,
+article .codehilite span.nt,
+article .codehilite span.nv {
+  color: var(--code-name) !important;
+}
