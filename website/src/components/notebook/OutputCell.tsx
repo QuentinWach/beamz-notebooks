@@ -8,7 +8,7 @@ function ImageOutput({ output }: { output: ParsedOutput }) {
   const mime = output.mimeType || 'image/png'
   const src = `data:${mime};base64,${output.content}`
   return (
-    <div className="my-2 flex justify-center">
+    <div className="my-6 flex justify-center">
       <img src={src} alt="Cell output" className="max-w-full rounded" />
     </div>
   )
