@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { notebooks } from '@/data/notebooks.gen'
 import { GalleryCard } from '@/components/gallery/GalleryCard'
+import { SubmitNotebookCard } from '@/components/gallery/SubmitNotebookCard'
 import { Badge } from '@/components/ui/badge'
 import { Search } from 'lucide-react'
 
@@ -61,17 +62,18 @@ export function HomePage() {
       </div>
 
       {/* Notebook grid */}
-      {filtered.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filtered.map((nb) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <SubmitNotebookCard />
+        {filtered.length > 0 ? (
+          filtered.map((nb) => (
             <GalleryCard key={nb.slug} notebook={nb} />
-          ))}
-        </div>
-      ) : (
-        <p className="text-center text-muted-foreground py-12">
-          No examples found matching your filters.
-        </p>
-      )}
+          ))
+        ) : (
+          <p className="text-center text-muted-foreground py-12 col-span-full">
+            No examples found matching your filters.
+          </p>
+        )}
+      </div>
     </div>
   )
 }
