@@ -11,7 +11,7 @@ function formatDate(dateStr: string): string {
 export function GalleryCard({ notebook }: { notebook: NotebookMeta }) {
   return (
     <Link to={`/examples/${notebook.slug}`}>
-      <Card className="h-full hover:border-foreground/20 transition-colors cursor-pointer overflow-hidden">
+      <Card className="h-full hover:border-foreground/20 transition-colors cursor-pointer overflow-hidden pt-0">
         {notebook.previewImage && (
           <div className="w-full h-40 overflow-hidden border-b">
             <img
