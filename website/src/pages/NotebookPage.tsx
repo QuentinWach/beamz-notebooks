@@ -70,7 +70,17 @@ export function NotebookPage() {
               Back to examples
             </Link>
             <div className="flex items-center justify-between">
-              <div />
+              <div className="text-sm text-muted-foreground">
+                <span>{notebook.author}</span>
+                <span className="mx-2">·</span>
+                <span>Published {new Date(notebook.publishedDate + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                {notebook.updatedDate !== notebook.publishedDate && (
+                  <>
+                    <span className="mx-2">·</span>
+                    <span>Updated {new Date(notebook.updatedDate + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                  </>
+                )}
+              </div>
               <Button variant="outline" size="sm" asChild>
                 <a href={`${import.meta.env.BASE_URL}notebooks/${filename}`} download>
                   <Download className="h-4 w-4 mr-2" />

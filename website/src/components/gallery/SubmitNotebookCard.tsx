@@ -55,6 +55,20 @@ export function SubmitNotebookCard() {
           </li>
           <li>Open a pull request against the main branch</li>
         </ol>
+
+        <div className="mt-3 rounded-md border bg-muted/50 p-3">
+          <p className="text-sm font-medium mb-2">Notebook format</p>
+          <p className="text-xs text-muted-foreground mb-2">
+            <strong>Cell 1</strong> (markdown) — title as <code className="bg-muted px-1 rounded"># Heading</code> followed by a description paragraph.
+          </p>
+          <p className="text-xs text-muted-foreground mb-2">
+            <strong>Cell 2</strong> (markdown, optional) — metadata:
+          </p>
+          <pre className="text-xs bg-muted rounded p-2 mb-2 overflow-x-auto"><code>{'**Author:** Your Name\n**Published:** 2025-01-15\n**Updated:** 2025-02-01\n**Tags:** Simulation, Optimization'}</code></pre>
+          <p className="text-xs text-muted-foreground">
+            All fields are optional. Tags are comma-separated and drive the homepage filter pills. You can also drag & drop a preview image into this cell. If omitted, the first plot output is used automatically.
+          </p>
+        </div>
         <Button asChild className="mt-2">
           <a
             href="https://github.com/QuentinWach/beamz-notebooks"
