@@ -40,12 +40,12 @@ export function SubmitNotebookCard() {
           <li>
             Fork the{' '}
             <a
-              href="https://github.com/QuentinWach/beamz"
+              href="https://github.com/QuentinWach/beamz-notebooks"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary underline underline-offset-4 hover:text-primary/80"
             >
-              beamz
+              beamz-notebooks
             </a>{' '}
             repository on GitHub
           </li>
@@ -57,7 +57,7 @@ export function SubmitNotebookCard() {
         </ol>
         <Button asChild className="mt-2">
           <a
-            href="https://github.com/QuentinWach/beamz"
+            href="https://github.com/QuentinWach/beamz-notebooks"
             target="_blank"
             rel="noopener noreferrer"
           >
