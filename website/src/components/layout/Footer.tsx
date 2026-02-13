@@ -3,7 +3,7 @@ import { Github } from 'lucide-react'
 export function Footer() {
   return (
     <footer className="border-t border-border py-6 mt-12">
-      <div className="max-w-7xl mx-auto px-4 flex flex-col items-center gap-3 text-sm text-muted-foreground">
+      <div className="max-w-7xl mx-auto px-4 flex flex-col items-center gap-3 text-sm text-muted-foreground opacity-50">
         <nav className="flex items-center gap-4">
           <a
             href="https://github.com/QuentinWach/beamz"
