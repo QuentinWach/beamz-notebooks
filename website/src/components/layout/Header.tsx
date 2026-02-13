@@ -7,11 +7,16 @@ import { useTheme } from '../../hooks/useTheme'
 export function Header() {
   const { theme, toggleTheme } = useTheme()
   const [stars, setStars] = useState<number | null>(null)
+  const [version, setVersion] = useState<string | null>(null)
 
   useEffect(() => {
     fetch('https://api.github.com/repos/quentinwach/beamz')
       .then(r => r.ok ? r.json() : null)
       .then(data => { if (data?.stargazers_count != null) setStars(data.stargazers_count) })
+      .catch(() => {})
+    fetch('https://api.github.com/repos/quentinwach/beamz/releases/latest')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => { if (data?.tag_name) setVersion(data.tag_name) })
       .catch(() => {})
   }, [])
 
@@ -34,11 +39,15 @@ export function Header() {
             href="https://github.com/quentinwach/beamz"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors bg-foreground text-background hover:bg-foreground/90"
           >
             <Github className="h-4 w-4" />
+            <span>Get Started</span>
+            {version && (
+              <span className="text-xs opacity-70">{version}</span>
+            )}
             {stars != null && (
-              <span className="flex items-center gap-0.5">
+              <span className="flex items-center gap-0.5 text-xs opacity-70">
                 <Star className="h-3 w-3 fill-current" />
                 {stars}
               </span>
