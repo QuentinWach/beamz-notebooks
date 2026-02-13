@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router'
-import { ArrowLeft, Download } from 'lucide-react'
+import { ArrowLeft, Download, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { NotebookRenderer } from '@/components/notebook/NotebookRenderer'
 import { TableOfContents } from '@/components/layout/TableOfContents'
@@ -87,12 +87,24 @@ export function NotebookPage() {
                   </>
                 )}
               </div>
-              <Button variant="outline" size="sm" asChild>
-                <a href={`${import.meta.env.BASE_URL}notebooks/${filename}`} download>
-                  <Download className="h-4 w-4 mr-2" />
-                  Download .ipynb
-                </a>
-              </Button>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" asChild>
+                  <a
+                    href={`https://colab.research.google.com/github/QuentinWach/beamz-notebooks/blob/main/notebooks/${filename}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    Open in Colab
+                  </a>
+                </Button>
+                <Button variant="outline" size="sm" asChild>
+                  <a href={`${import.meta.env.BASE_URL}notebooks/${filename}`} download>
+                    <Download className="h-4 w-4 mr-2" />
+                    Download .ipynb
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
 
