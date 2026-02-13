@@ -3,31 +3,7 @@ import { notebooks } from '@/data/notebooks.gen'
 import { GalleryCard } from '@/components/gallery/GalleryCard'
 import { SubmitNotebookCard } from '@/components/gallery/SubmitNotebookCard'
 import { Badge } from '@/components/ui/badge'
-import { Search, Copy, Check } from 'lucide-react'
-
-function PipInstall() {
-  const [copied, setCopied] = useState(false)
-  const command = 'pip install beamz'
-
-  function copy() {
-    navigator.clipboard.writeText(command)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
-  return (
-    <div className="inline-flex items-center gap-2 rounded-md border border-border bg-muted px-4 py-2 text-sm font-mono">
-      <span className="select-all">{command}</span>
-      <button
-        onClick={copy}
-        className="text-muted-foreground hover:text-foreground transition-colors"
-        aria-label="Copy install command"
-      >
-        {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-      </button>
-    </div>
-  )
-}
+import { Search } from 'lucide-react'
 
 export function HomePage() {
   const [query, setQuery] = useState('')
