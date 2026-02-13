@@ -39,7 +39,7 @@ export function Header() {
             href="https://github.com/quentinwach/beamz"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors bg-foreground text-background hover:bg-foreground/90"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium text-foreground glass-btn"
           >
             <Github className="h-4 w-4" />
             <span>Get Started</span>
