@@ -132,6 +132,36 @@ function extractMetadata(cells: RawCell[], fallbackDate: string): ExtractedMetad
   return { title, description, tags, author, publishedDate, updatedDate, beamzVersion, previewImage, metadataCellIndex }
 }
 
+const MIME_MAP: Record<string, string> = { '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.svg': 'image/svg+xml' }
+
+/** Rewrite attachment: refs in markdown using the cell's attachments. */
+function expandAttachmentImages(source: string, attachments: RawCell['attachments']): string {
+  if (!attachments) return source
+  return source.replace(/!\[([^\]]*)\]\(attachment:([^)]+)\)/g, (_, alt, name) => {
+    const key = name.trim()
+    const mimeData = attachments[key]
+    if (!mimeData) return `![${alt}](attachment:${key})`
+    for (const [mime, base64] of Object.entries(mimeData)) {
+      if (mime.startsWith('image/')) return `![${alt}](data:${mime};base64,${base64})`
+    }
+    return `![${alt}](attachment:${key})`
+  })
+}
+
+/** Rewrite relative image paths in markdown to data URLs so they work on the website. */
+function inlineMarkdownImages(source: string, notebooksDir: string): string {
+  return source.replace(/!\[([^\]]*)\]\((?!data:)(?!attachment:)([^)]+)\)/g, (_, alt, imgPath) => {
+    const trimmed = imgPath.trim()
+    if (/^https?:\/\//i.test(trimmed)) return `![${alt}](${imgPath})`
+    const resolved = path.resolve(notebooksDir, trimmed)
+    if (!fs.existsSync(resolved)) return `![${alt}](${imgPath})`
+    const ext = path.extname(resolved).toLowerCase()
+    const mime = MIME_MAP[ext] || 'image/png'
+    const base64 = fs.readFileSync(resolved).toString('base64')
+    return `![${alt}](data:${mime};base64,${base64})`
+  })
+}
+
 function extractToc(cells: RawCell[]): { id: string; text: string; level: number }[] {
   const toc: { id: string; text: string; level: number }[] = []
 
@@ -242,9 +272,11 @@ async function main() {
       const source = cell.source.join('')
 
       if (cell.cell_type === 'markdown') {
+        let out = expandAttachmentImages(source, cell.attachments)
+        out = inlineMarkdownImages(out, NOTEBOOKS_DIR)
         cells.push({
           cellType: 'markdown',
-          source,
+          source: out,
           outputs: [],
         })
         continue
